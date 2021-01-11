@@ -21,9 +21,14 @@
 });
 </script>
 <script>
-analytics.track('RG Signup Form Submitted', {
-  companyName: 'Tango Card Inc.',
-  firstName: 'Timmy',
+window.addEventListener('message', event => {
+   if(event.data.type === 'hsFormCallback' && event.data.eventName === 'onFormSubmit') {
+     analytics.track('RG Signup Form Submitted', {
+       companyName: 'Tango Card Inc.',
+       firstName: 'Timmy',
+     });;
+       console.log("Form Submitted!");
+   }
 });
 </script>
 </html>

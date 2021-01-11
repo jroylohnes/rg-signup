@@ -24,8 +24,8 @@
 window.addEventListener('message', event => {
    if(event.data.type === 'hsFormCallback' && event.data.eventName === 'onFormSubmit') {
      analytics.track('RG Signup Form Submitted', {
-       lastname: document.getElementById('lastname-a41b9c04-d072-407b-9f79-ee5108a0c393.hs-input'),
-       firstname: document.getElementById('firstname-a41b9c04-d072-407b-9f79-ee5108a0c393.hs-input'),
+       lastname: document.getElementById('input#lastname-a41b9c04-d072-407b-9f79-ee5108a0c393'),
+       firstname: document.getElementById('input#firstname-a41b9c04-d072-407b-9f79-ee5108a0c393'),
      });;
        console.log("Form Submitted!");
    }

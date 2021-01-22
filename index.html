@@ -25,10 +25,9 @@ window.addEventListener('message', event => {
    if(event.data.type === 'hsFormCallback' && event.data.eventName === 'onFormSubmit') {
      analytics.track('RG Signup Form Submitted', {
        event: event.data
-     });;
+     });
        console.log("Form Submitted!");
-       console.log(event.data);
-       console.log(event.data);
+	console.log(event);
    }
 });
 </script>

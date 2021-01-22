@@ -8,7 +8,7 @@
   }}();
 </script>
 </head>
-<div style="width:864px;">
+<div style="width:864px;"></div>
 <body>
 </body>
 <!--[if lte IE 8]>
@@ -26,12 +26,11 @@ window.addEventListener('message', event => {
    if(event.data.type === 'hsFormCallback' && event.data.eventName === 'onFormSubmit') {
      analytics.track('RG Signup Form Submitted', {
        event: event.data
-     });
+     });;
        console.log("Form Submitted!");
+       console.log(event.data);
        console.log(event.data);
    }
 });
 </script>
-</div>
-</body>
 </html>

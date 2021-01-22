@@ -9,7 +9,7 @@
 </script>
 </head>
 <body>
-<div style="width:800px;text-align:center;">
+</body>
 <!--[if lte IE 8]>
 <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2-legacy.js"></script>
 <![endif]-->
@@ -26,9 +26,9 @@ window.addEventListener('message', event => {
      analytics.track('RG Signup Form Submitted', {
        event: event.data
      });
-	   console.log(event);
+       console.log("Form Submitted!");
+       console.log(event.data);
    }
 });
 </script>
-</body>	
 </html>

@@ -21,7 +21,6 @@
 });
 </script>
 <script>
-var email = $form.find('input[name="email"]');
 window.addEventListener('message', event => {
    if(event.data.type === 'hsFormCallback' && event.data.eventName === 'onFormSubmit') {
      analytics.track('RG Signup Form Submitted', {
@@ -30,8 +29,9 @@ window.addEventListener('message', event => {
        console.log("Form Submitted!");
        console.log(event.data);
        console.log(event);
+	const emailProperty = event.data.find( ({ name }) => name ==='email' );
        analytics.identify({
-        email: email
+        email: emailProperty.value
         });
    }
 });

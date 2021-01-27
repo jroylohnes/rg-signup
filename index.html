@@ -28,9 +28,9 @@ window.addEventListener('message', event => {
      });
     console.log("Form Submitted!");
     console.log(event.data);
-    const result = event.data.data.find( ({ name }) => name === 'email' );
+    const emailProperty = event.data.data.find( ({ name }) => name === 'email' );
     analytics.identify({
-    email: result.value
+    email: emailProperty.value
         });
    }
 });

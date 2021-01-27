@@ -28,8 +28,9 @@ window.addEventListener('message', event => {
      });
     console.log("Form Submitted!");
     console.log(event.data);
+    const result = event.data.data.find( ({ name }) => name === 'email' );
     analytics.identify({
-    email: event.data.data[3]
+    email: result.value
         });
    }
 });

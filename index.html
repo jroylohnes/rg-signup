@@ -28,16 +28,13 @@ window.addEventListener('message', event => {
      });
        console.log("Form Submitted!");
        console.log(event.data);
-       console.log(event);
        function objectFindByKey(array, key, value) {
-    for (var i = 0; i < array.length; i++) {
-        console.log(array[i]);
-        if (array[i][key] === value) {
-            return array[i];
+        for (var i = 0; i < array.length; i++) {
+            console.log(array[i]);
+            if (array[i][key] === value) {
+                return array[i];
+            }}
         }
-    }
-    return null;
-}
     var emailValue = objectFindByKey(event.data, 'name', 'email');
        analytics.identify({
         email: emailValue

@@ -30,7 +30,7 @@ window.addEventListener('message', event => {
        console.log(event.data);
        console.log(event);
        analytics.identify({
-        email: document.getElementById("Email")
+        email: event.data.name === 'email'
         });
    }
 });

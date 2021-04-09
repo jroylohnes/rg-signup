@@ -159,16 +159,6 @@ img.emoji {
         </button>
       </div>
       <div class="modal-body">
-        
-					<script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/v2.js"></script>
-					<script>
-						hbspt.forms.create({
-							portalId: 4018057,
-							formId: "2a28197e-882b-4345-b69e-32fbc997c762",
-							shortcode: "wp",
-							
-						});
-					</script>
 				
       </div>
     </div>
@@ -191,7 +181,63 @@ img.emoji {
 <p>Located outside of the United States? We’d still love to work with you. Fill out this <strong><a href="/intnl-form/">lead form</a></strong> and we’ll get back to you soon. </p>
 <p>Are you a recipient looking for help redeeming your reward? Visit our <strong><a href="https://help.tangocard.com/" rel="noopener" target="_blank">Help Center</a></strong>. </p>
 
+<script src="https://demo.docusign.net/clickapi/sdk/latest/docusign-click.js"></script>
+<script charset="utf-8" type="text/javascript" src="https://js.hsforms.net/forms/shell.js"></script>
+<script>
+        // Initialize HubSpot Form
+        hbspt.forms.create({
+            portalId: "9250773",
+            formId: "2265a1aa-d016-47a6-a1a3-a7aed9ce3705",
+            onFormReady: function ($form) {
 
+                // Generate a unique User ID
+                var userId = Math.random().toString(36).substr(2, 5)
+
+                // Get hidden field to store metadata after completing clickwrap
+                var agreementId = $form.find('input[name="agreement_id"]');
+                var agreementStatus = false;
+
+                // Get checkbox button from form
+                var checkbox = $form.find('input[name="click"]');
+
+                // Attach event listener to to checkbox
+                checkbox[0].addEventListener("click", function (event) {
+
+                    // Check if clickwrap is required
+                    if (this.checked && !agreementStatus) {
+
+                        // Disable to prevent submission while clickwrap is loading
+                        checkbox.attr('disabled', true).change();
+
+                        // Callback events for completed clickwrap for optional logic
+                        var agreed = function _agreed(clickwrap) {
+                            // Store agreement ID as metadata in hidden field
+                            agreementId.val(clickwrap.agreementId).change();
+                            agreementStatus = true;
+                            this.attr('disabled', false).change();
+                        }
+                        var declined = function _declined() {
+                            // Uncheck consent box if they decline the clickwrap
+                            this.prop("checked", false).change();
+                            this.attr('disabled', false).change();
+                        }
+
+                        // Start the clickwrap
+                        docuSignClick.Clickwrap.render({
+                            environment: 'https://demo.docusign.net',
+                            accountId: '4c887f32-f263-4765-8047-93ef8eb7af26',
+                            clickwrapId: 'e88d9095-cb2e-4252-86ad-70443184099f',
+                            clientUserId: userId,
+                            onDeclined: declined.bind(checkbox),
+                            onAgreed: agreed.bind(checkbox)
+                        }, '#ds-clickwrap');
+                    }
+                }, false);
+            }
+        });
+
+    </script>		
+		
         </div>
       </div>
     </div>

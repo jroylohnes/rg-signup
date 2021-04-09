@@ -251,7 +251,53 @@ img.emoji {
     onFormReady: function($form){window.ClearbitForHubspot.addForm($form); },
 	region: "na1",
 	portalId: "8511504",
-	formId: "a41b9c04-d072-407b-9f79-ee5108a0c393"
+	formId: "a41b9c04-d072-407b-9f79-ee5108a0c393",
+            onFormReady: function ($form) {
+
+                // Generate a unique User ID
+                var userId = Math.random().toString(36).substr(2, 5)
+
+                // Get hidden field to store metadata after completing clickwrap
+                var agreementId = $form.find('input[name="agreement_id"]');
+                var agreementStatus = false;
+
+                // Get checkbox button from form
+                var checkbox = $form.find('input[name="rewards_genius_is_a_service_hosted_by_tango_card_inc_by_checking_the_box_and_clicking_submit_you_ha"]');
+
+                // Attach event listener to to checkbox
+                checkbox[0].addEventListener("rewards_genius_is_a_service_hosted_by_tango_card_inc_by_checking_the_box_and_clicking_submit_you_ha", function (event) {
+
+                    // Check if clickwrap is required
+                    if (this.checked && !agreementStatus) {
+
+                        // Disable to prevent submission while clickwrap is loading
+                        checkbox.attr('disabled', true).change();
+
+                        // Callback events for completed clickwrap for optional logic
+                        var agreed = function _agreed(clickwrap) {
+                            // Store agreement ID as metadata in hidden field
+                            agreementId.val(clickwrap.agreementId).change();
+                            agreementStatus = true;
+                            this.attr('disabled', false).change();
+                        }
+                        var declined = function _declined() {
+                            // Uncheck consent box if they decline the clickwrap
+                            this.prop("checked", false).change();
+                            this.attr('disabled', false).change();
+                        }
+
+                        // Start the clickwrap
+                        docuSignClick.Clickwrap.render({
+                            environment: 'https://demo.docusign.net',
+                            accountId: '4c887f32-f263-4765-8047-93ef8eb7af26',
+                            clickwrapId: 'e88d9095-cb2e-4252-86ad-70443184099f',
+                            clientUserId: userId,
+                            onDeclined: declined.bind(checkbox),
+                            onAgreed: agreed.bind(checkbox)
+                        }, '#ds-clickwrap');
+                    }
+                }, false);
+            }
 });
 </script></p>
 

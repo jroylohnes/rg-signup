@@ -187,16 +187,15 @@ img.emoji {
 	<script>
   !function(o){var r=document.getElementsByTagName("script")[0];if("object"==typeof o.ClearbitForHubspot)return console.log("Clearbit For HubSpot included more than once"),!1;o.ClearbitForHubspot={},o.ClearbitForHubspot.forms=[],o.ClearbitForHubspot.addForm=function(r){var t=r[0];"function"==typeof o.ClearbitForHubspot.onFormReady?o.ClearbitForHubspot.onFormReady(t):o.ClearbitForHubspot.forms.push(t)};var t=document.createElement("script");t.async=!0,t.src="https://hubspot.clearbit.com/v1/forms/pk_327ec8ff33e7c14c7cc84a734aa96b48/forms.js",r.parentNode.insertBefore(t,r)}(window);
   </script>
-  
 <script>
         // Initialize HubSpot Form
         hbspt.forms.create({
             portalId: "8511504",
             formId: "a41b9c04-d072-407b-9f79-ee5108a0c393",
             onFormReady: function ($form) {
-		            window.ClearbitForHubspot.addForm($form);
-                });
-
+		window.ClearbitForHubspot.addForm($form);
+            }
+        });
 </script>		
 		
         </div>

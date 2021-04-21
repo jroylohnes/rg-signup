@@ -220,11 +220,17 @@ img.emoji {
                             agreementId.val(clickwrap.agreementId).change();
                             agreementStatus = true;
                             this.attr('disabled', false).change();
+			    // Fix scrolling bug
+			    let frame = document.querySelector('[id^="hs-form-iframe"]');
+			    frame.scrolling = "yes";
                         }
                         var declined = function _declined() {
                             // Uncheck consent box if they decline the clickwrap
                             this.prop("checked", false).change();
                             this.attr('disabled', false).change();
+			    // Fix scrolling bug
+			    let frame = document.querySelector('[id^="hs-form-iframe"]');
+			    frame.scrolling = "yes";
                         }
 
                         // Start the clickwrap

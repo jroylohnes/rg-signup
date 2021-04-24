@@ -188,13 +188,13 @@ img.emoji {
   !function(o){var r=document.getElementsByTagName("script")[0];if("object"==typeof o.ClearbitForHubspot)return console.log("Clearbit For HubSpot included more than once"),!1;o.ClearbitForHubspot={},o.ClearbitForHubspot.forms=[],o.ClearbitForHubspot.addForm=function(r){var t=r[0];"function"==typeof o.ClearbitForHubspot.onFormReady?o.ClearbitForHubspot.onFormReady(t):o.ClearbitForHubspot.forms.push(t)};var t=document.createElement("script");t.async=!0,t.src="https://hubspot.clearbit.com/v1/forms/pk_327ec8ff33e7c14c7cc84a734aa96b48/forms.js",r.parentNode.insertBefore(t,r)}(window);
   </script>
 <div id="ds-clickwrap"></div>
-<script>
+    <script>
         // Initialize HubSpot Form
         hbspt.forms.create({
             portalId: "8511504",
             formId: "a41b9c04-d072-407b-9f79-ee5108a0c393",
             onFormReady: function ($form) {
-		window.ClearbitForHubspot.addForm($form);
+
                 // Generate a unique User ID
                 var userId = Math.random().toString(36).substr(2, 5)
 
@@ -220,22 +220,23 @@ img.emoji {
                             agreementId.val(clickwrap.agreementId).change();
                             agreementStatus = true;
                             this.attr('disabled', false).change();
-			    // Fix scrolling bug
-			    document.body.style.overflow = "scroll";
+							// Fix scrolling bug
+							document.body.style.overflow = "scroll";
+
                         }
                         var declined = function _declined() {
                             // Uncheck consent box if they decline the clickwrap
                             this.prop("checked", false).change();
                             this.attr('disabled', false).change();
-			    // Fix scrolling bug
-			    document.body.style.overflow = "scroll";
+							// Fix scrolling bug
+							document.body.style.overflow = "scroll";
                         }
 
                         // Start the clickwrap
                         docuSignClick.Clickwrap.render({
                             environment: 'https://demo.docusign.net',
-                            accountId: '93e9c873-8321-41e0-b05c-b4a656a1a99a',
-                            clickwrapId: '42a641e4-39c1-4489-b0ac-8bdcb3c61f04',
+                            accountId: '4c887f32-f263-4765-8047-93ef8eb7af26',
+                            clickwrapId: 'e88d9095-cb2e-4252-86ad-70443184099f',
                             clientUserId: userId,
                             onDeclined: declined.bind(checkbox),
                             onAgreed: agreed.bind(checkbox)
@@ -245,7 +246,7 @@ img.emoji {
             }
         });
 
-    </script>		
+    </script>	
 		
         </div>
       </div>

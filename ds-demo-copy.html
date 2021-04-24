@@ -1,0 +1,79 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>HubSpot | DocuSign Click</title>
+    <link rel="shortcut icon" type="image/png" href="favicon.ico" />
+    <script src="https://demo.docusign.net/clickapi/sdk/latest/docusign-click.js"></script>
+    <script charset="utf-8" type="text/javascript" src="https://js.hsforms.net/forms/shell.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body style="max-width: 800px; margin: auto; padding: 1rem;">
+
+    <div id="ds-clickwrap"></div>
+
+    <script>
+        // Initialize HubSpot Form
+        hbspt.forms.create({
+            portalId: "8511504",
+            formId: "a41b9c04-d072-407b-9f79-ee5108a0c393",
+            onFormReady: function ($form) {
+
+                // Generate a unique User ID
+                var userId = Math.random().toString(36).substr(2, 5)
+
+                // Get hidden field to store metadata after completing clickwrap
+                var agreementId = $form.find('input[name="agreement_id"]');
+                var agreementStatus = false;
+
+                // Get checkbox button from form
+                var checkbox = $form.find('input[name="click"]');
+
+                // Attach event listener to to checkbox
+                checkbox[0].addEventListener("click", function (event) {
+
+                    // Check if clickwrap is required
+                    if (this.checked && !agreementStatus) {
+
+                        // Disable to prevent submission while clickwrap is loading
+                        checkbox.attr('disabled', true).change();
+
+                        // Callback events for completed clickwrap for optional logic
+                        var agreed = function _agreed(clickwrap) {
+                            // Store agreement ID as metadata in hidden field
+                            agreementId.val(clickwrap.agreementId).change();
+                            agreementStatus = true;
+                            this.attr('disabled', false).change();
+							// Fix scrolling bug
+							document.body.style.overflow = "scroll";
+
+                        }
+                        var declined = function _declined() {
+                            // Uncheck consent box if they decline the clickwrap
+                            this.prop("checked", false).change();
+                            this.attr('disabled', false).change();
+							// Fix scrolling bug
+							document.body.style.overflow = "scroll";
+                        }
+
+                        // Start the clickwrap
+                        docuSignClick.Clickwrap.render({
+                            environment: 'https://demo.docusign.net',
+                            accountId: '4c887f32-f263-4765-8047-93ef8eb7af26',
+                            clickwrapId: 'e88d9095-cb2e-4252-86ad-70443184099f',
+                            clientUserId: userId,
+                            onDeclined: declined.bind(checkbox),
+                            onAgreed: agreed.bind(checkbox)
+                        }, '#ds-clickwrap');
+                    }
+                }, false);
+            }
+        });
+
+    </script>
+
+</body>
+</html>

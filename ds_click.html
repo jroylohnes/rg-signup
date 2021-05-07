@@ -216,7 +216,7 @@ img.emoji {
 
                         // Disable to prevent submission while clickwrap is loading
                         checkbox.attr('disabled', true).change();
-		    	submit.attr('disabled', true).change();
+		    	        submit.attr('disabled', true).change();
 
                         // Callback events for completed clickwrap for optional logic
                         var agreed = function _agreed(clickwrap) {
@@ -224,7 +224,6 @@ img.emoji {
                             agreementId.val(clickwrap.agreementId).change();
                             agreementStatus = true;
                             this.attr('disabled', false).change();
-				submit.attr('disabled', false).change();
 							// Fix scrolling bug
 							document.body.style.overflow = "scroll";
 
@@ -233,7 +232,6 @@ img.emoji {
                             // Uncheck consent box if they decline the clickwrap
                             this.prop("checked", false).change();
                             this.attr('disabled', false).change();
-				submit.attr('disabled', false).change();
 							// Fix scrolling bug
 							document.body.style.overflow = "scroll";
                         }
@@ -245,7 +243,9 @@ img.emoji {
                             clickwrapId: 'c80f3e45-6a90-4e67-b72e-d49d9620c537',
                             clientUserId: userId,
                             onDeclined: declined.bind(checkbox),
-                            onAgreed: agreed.bind(checkbox)
+                            onAgreed: agreed.bind(checkbox),
+                            onDeclined: declined.bind(submit),
+                            onAgreed: agreed.bind(submit)
                         }, '#ds-clickwrap');
                     }
                 }, false);

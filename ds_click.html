@@ -206,6 +206,7 @@ img.emoji {
 
                 // Get checkbox button from form
                 var checkbox = $form.find('input[name="click"]');
+	    	var submit = $form.find('input[name="submit"]');
 
                 // Attach event listener to to checkbox
                 checkbox[0].addEventListener("click", function (event) {
@@ -215,6 +216,7 @@ img.emoji {
 
                         // Disable to prevent submission while clickwrap is loading
                         checkbox.attr('disabled', true).change();
+		    	submit.attr('disabled', true).change();
 
                         // Callback events for completed clickwrap for optional logic
                         var agreed = function _agreed(clickwrap) {
@@ -222,6 +224,7 @@ img.emoji {
                             agreementId.val(clickwrap.agreementId).change();
                             agreementStatus = true;
                             this.attr('disabled', false).change();
+				submit.attr('disabled', false).change();
 							// Fix scrolling bug
 							document.body.style.overflow = "scroll";
 
@@ -230,6 +233,7 @@ img.emoji {
                             // Uncheck consent box if they decline the clickwrap
                             this.prop("checked", false).change();
                             this.attr('disabled', false).change();
+				submit.attr('disabled', false).change();
 							// Fix scrolling bug
 							document.body.style.overflow = "scroll";
                         }

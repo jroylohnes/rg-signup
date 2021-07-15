@@ -87,6 +87,111 @@
 <script src="https://na2.docusign.net/clickapi/sdk/latest/docusign-click.js"></script>
 <script charset="utf-8" type="text/javascript" src="https://js.hsforms.net/forms/shell.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	
+<script>
+      // Initialize HubSpot Form
+      hbspt.forms.create({
+          portalId: "4018057",
+          formId: "b8f8ae1c-ced3-4fd1-94f4-8c5a62ed5aa5",
+          onFormReady: function ($form) {
+      
+              // Generate a unique User ID
+              var userId = Math.random().toString(36).substr(2, 5)
+      
+              // Get hidden field to store metadata after completing clickwrap
+              var agreementId = $form.find('input[name="agreement_id"]');
+              var agreementStatus = false;
+      
+              // Get checkbox button from form
+              var checkbox = $form.find('input[name="rg_terms_and_privacy"]');
+        var submit = $form.find('input[type="submit"]');
+      
+              // Attach event listener to to checkbox
+              checkbox[0].addEventListener("click", function (event) {
+      
+                  // Check if clickwrap is required
+                  if (this.checked && !agreementStatus) {
+      
+                      // Disable to prevent submission while clickwrap is loading
+                      checkbox.attr('disabled', true).change();
+             submit.attr('disabled', true).change();
+      
+                      // Callback events for completed clickwrap for optional logic
+                      var agreed = function _agreed(clickwrap) {
+                          // Store agreement ID as metadata in hidden field
+                          agreementId.val(clickwrap.agreementId).change();
+                          agreementStatus = true;
+                          this.attr('disabled', false).change();
+                          submit.attr('disabled', false).change();
+      // Fix scrolling bug
+      document.body.style.overflow = "scroll";
+      
+                      }
+                      var declined = function _declined() {
+                          // Uncheck consent box if they decline the clickwrap
+                          this.prop("checked", false).change();
+                          this.attr('disabled', false).change();
+                          submit.attr('disabled', false).change();
+      // Fix scrolling bug
+      document.body.style.overflow = "scroll";
+                      }
+      
+                      // Start the clickwrap
+                      docuSignClick.Clickwrap.render({
+                          environment: 'https://na2.docusign.net/',
+                          accountId: 'cb3da756-58e6-43c6-99a9-caea4eb2aa3a',
+                          clickwrapId: '44b8a451-bbae-4745-ab70-06cf9bc7ad53',
+                          clientUserId: userId,
+                          onDeclined: declined.bind(checkbox),
+                          onAgreed: agreed.bind(checkbox)
+                      }, '#ds-clickwrap');
+                  }
+              }, false);
+          }
+      });
+      
+   </script>
+	
+<script data-cfasync="false">
+  document.onreadystatechange = function () {
+    if (document.readyState == "complete") {
+      var logout_link = document.querySelectorAll('a[href*="wp-login.php?action=logout"]');
+      if (logout_link) {
+        for(var i=0; i < logout_link.length; i++) {
+          logout_link[i].addEventListener( "click", function() {
+            Intercom('shutdown');
+          });
+        }
+      }
+    }
+  };
+</script>
+	
+<script data-cfasync="false">
+  window.intercomSettings = {"app_id":""};
+</script>
+<script data-cfasync="false">(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script><script type='text/javascript' id='leadin-script-loader-js-js-extra'>
+/* <![CDATA[ */
+var leadin_wordpress = {"userRole":"visitor","pageType":"page","leadinPluginVersion":"7.30.5"};
+/* ]]> */
+</script>
+<script async defer id="hs-script-loader" type='text/javascript' src='//js.hs-scripts.com/4018057.js?integration=WordPress' id='leadin-script-loader-js-js'></script>
+<script type='text/javascript' id='ubermenu-js-extra'>
+/* <![CDATA[ */
+var ubermenu_data = {"remove_conflicts":"on","reposition_on_load":"off","intent_delay":"300","intent_interval":"100","intent_threshold":"7","scrollto_offset":"50","scrollto_duration":"1000","responsive_breakpoint":"991","accessible":"on","retractor_display_strategy":"responsive","touch_off_close":"on","submenu_indicator_close_mobile":"on","collapse_after_scroll":"on","v":"3.4.0.1","configurations":["main"],"ajax_url":"https:\/\/www.rewardsgenius.com\/wp-admin\/admin-ajax.php","plugin_url":"https:\/\/www.rewardsgenius.com\/wp-content\/plugins\/ubermenu\/","disable_mobile":"off","prefix_boost":"","aria_role_navigation":"off","aria_expanded":"off","aria_hidden":"off","aria_controls":"","aria_responsive_toggle":"off","theme_locations":{"primary_navigation":"Primary Navigation","footer_navigation":"Footer Navigation"}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.rewardsgenius.com/wp-content/plugins/ubermenu/assets/js/ubermenu.min.js?ver=3.4.0.1' id='ubermenu-js'></script>
+<script type='text/javascript' id='sage/main.js-js-extra'>
+/* <![CDATA[ */
+var Fresh = {"api_base":"https:\/\/www.rewardsgenius.com\/wp-json\/fresh"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.rewardsgenius.com/wp-content/themes/rewardgenius/dist/scripts/main_9d014611.js' id='sage/main.js-js'></script>
+<script type='text/javascript' src='https://www.rewardsgenius.com/wp-includes/js/wp-embed.min.js?ver=5.6.2' id='wp-embed-js'></script>
+	
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KZMKDFG"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 </HEAD>
 
